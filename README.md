@@ -1,4 +1,4 @@
-### Create Aws Instance for Debian 11
+## Create Aws Instance for Debian 11
  - Debian 11 dont have  php8.1 version. It is having most stable version of php is php7.4 .
  - For php 8.1 we have to go on https://deb.sury.org/ this is debian php package page. 
  - packages.sury.org/php/README.txt open this txt file
@@ -24,8 +24,8 @@
 ### Install Mysql
   - Install mysql
  `apt install ./mysql-apt-config_0.8.26-1_all.deb`
- #### correct the keyring data for the mysql archive.
+ ### correct the keyring data for the mysql archive.
 
 
-### Install php8.1 on the Debian 11
+## Install php8.1 on the Debian 11
 
