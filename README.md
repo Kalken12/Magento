@@ -383,6 +383,40 @@ set $MAGE_ROOT  /opt/magento;
 
 ### Install and configure phpmyadmin with mangento
 - Installing phpmyadmin
+   ` sudo apt install phpmyadmin`
 
+- Need to create a symbolic link from the installation files to Nginx’s document root directory.
 
+  `sudo ln -s /usr/share/phpmyadmin /opt/magento2/phpmyadmin`
+- Your phpMyAdmin installation is now operational. To access the interface, go to your server’s domain name or public IP address followed by /phpmyadmin in your web browser:
+
+  `https://test.mgt.com/phpmyadmin`
+- Add below snippet in nginx.conf for magento in my case it is /etc/nginx/conf.d/magento2.conf
+ 
+```
+    location /phpmyadmin {
+           root /usr/share/;
+           index index.php index.html index.htm;
+           location ~ ^/phpmyadmin/(.+\.php)$ {
+                   try_files $uri =404;
+                   root /usr/share/;
+                   fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+                   fastcgi_index index.php;
+                   fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                   include /etc/nginx/fastcgi_params;
+           }
+           location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+                   root /usr/share/;
+           }
+
+```
+
+- If u think u need to reconfigure phpmyadmin 
+ `dpkg-reconfigure -plow phpmyadmin`
+- Log in to phpmyadmin user
+ `mysql -u phpmyadmin -p`
+
+- Restart Nginx 
+
+ `systemctl restart nginx`
 
