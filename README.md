@@ -201,7 +201,7 @@ After the download is complete, you can start the installation with the command 
 #### Configure Magento 2 to use Redis as session storage
 - To configure Magento 2 to use Redis for sessions, replace the session settings in/opt/magento2/ app/etc/env.php with the following one:
 
-  ```
+ ```
 'session' => [
     'save' => 'redis',
     'redis' => [
@@ -225,7 +225,9 @@ After the download is complete, you can start the installation with the command 
         'max_lifetime' => '2592000'
     ]
 ],
+
 ```
+
 #### Configure Redis Default Caching
 
 `sudo -u www-data bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=127.0.0.1 –cache-backend-redis-db=0`
