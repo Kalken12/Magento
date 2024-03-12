@@ -265,7 +265,7 @@ After the download is complete, you can start the installation with the command 
 ```
 - Update composer
 
-`sudo composer update`
+    `sudo composer update`
 
 - If prompted for a username and password, use your authentication keys.
 
@@ -273,11 +273,11 @@ After the download is complete, you can start the installation with the command 
 
 - Verify the sample data installation by running the following commands:
 
-`sudo php bin/magento setup:upgrade`
+     `sudo php bin/magento setup:upgrade`
 
-`sudo php bin/magento setup:di:compile
+     `sudo php bin/magento setup:di:compile
 
-`sudo php bin/magento setup:static-content:deploy -f`
+      `sudo php bin/magento setup:static-content:deploy -f`
 
 - Now done with the sample data, You can check on browser by refreshing test.mgt.com data will be there.
 
