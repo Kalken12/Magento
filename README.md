@@ -9,83 +9,88 @@
       `apt-get update`
 - Install following packages
 - Download https://packages.sury.org/debsuryorg-archive-keyring.deb this file and /tmp/debsuryorg-archive-keyring.deb on this location.
-  `curl -sSLo /tmp/debsuryorg-archive-keyring.deb  https://packages.sury.org/debsuryorg-archive-keyring.deb`
+      `curl -sSLo /tmp/debsuryorg-archive-keyring.deb  https://packages.sury.org/debsuryorg-archive-keyring.deb`
 -  install using dpkg to file at location /tmp/debsuryorg-archive-keyring.deb 
-    `dpkg -i /tmp/debsuryorg-archive-keyring.deb`
+      `dpkg -i /tmp/debsuryorg-archive-keyring.deb`
 -  Use this command to copy data inside /etc/apt/sources.list/php.list
- ` sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'`
+      ` sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'`
 - You can check data in php.list
 
- ` cat /etc/apt/sources.list.d/php.list `
+      ` cat /etc/apt/sources.list.d/php.list `
 
-  `apt-get update`
+      `apt-get update`
 
 - we have all drivers for php8.1 install now php8.1
 
-  `apt install php8.1`
+      `apt install php8.1`
 
-   `php -version`
+      `php -version`
 
 - install some dependecies for maganto installation
 
-  `apt install php8.1-xml  php8.1-curl php8.1-gd php8.1-intl php8.1-mysql php8.1-zip  php8.1-soap php8.1-mbstring php8.1-bcmath`
+      `apt install php8.1-xml  php8.1-curl php8.1-gd php8.1-intl php8.1-mysql php8.1-zip  php8.1-soap php8.1-mbstring php8.1-bcmath`
 
 ### Keyring data for the mysql archive.
 
-` mkdir /etc/apt/keyrings`
+     `mkdir /etc/apt/keyrings`
 
-`gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys B7B3B788A8D3785C && rm -f /usr/share/keyrings/mysql-apt-config.gpg && gpg  --output /usr/share/keyrings/mysql-apt-config.gpg --export B7B3B788A8D3785C`
+     `gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys B7B3B788A8D3785C && rm -f /usr/share/keyrings/mysql-apt-config.gpg && gpg  --output /usr/share/keyrings/mysql-apt-config.gpg --export B7B3B788A8D3785C`
 
 
 ### Install Mysql
   
- `apt install ./mysql-apt-config_0.8.26-1_all.deb`
+     `apt install ./mysql-apt-config_0.8.26-1_all.deb`
  - Install mysql-server (check using   apt search mysql-server)
-   `apt install mysql-server`
+     `apt install mysql-server`
  - Check version
-  `mysql --version`
+     `mysql --version`
 ### Install Nginx
 - Install Nginx
-  `apt install –no-install-recommends nginx`
+     `apt install –no-install-recommends nginx`
 - Check status 
-  'systemctl status nginx'
+      'systemctl status nginx'
 ### Install Elasticsearch and configuration needs prerequisite
   - update system
-  `apt update`
+      `apt update`
 #### Prerequisite:
    - Install openjdk default
    
-`apt install –no-install-recommends default-jre`
+     `apt install –no-install-recommends default-jre`
  - To begin, use cURL, the command line tool for transferring data with URLs, to import the Elasticsearch public GPG key into APT. Note that we are using the arguments -fsSL to silence all progress and possible errors (except for a server failure) and to allow cURL to make a request on a new location if redirected. Pipe the output of the cURL command into the apt-key program, which adds the public GPG key to APT.
 
-`curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
+     `curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
 - Next, add the Elastic source list to the sources.list.d directory, where APT will search for new sources:
-`echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list`
+     `echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list`
 
 - Next, update your package lists so APT will read the new Elastic source:
-`sudo apt update`
+     `sudo apt update`
 
 ### Install Elasticsearch
 
-- Install elasticsearch by following command ` apt install  --no-install-recommends elasticsearch`
+- Install elasticsearch by following command 
+    
+   ` apt install  --no-install-recommends elasticsearch`
+
 - Elasticsearch listens for traffic from everywhere on port 9200. You will want to restrict outside access to your Elasticsearch instance to prevent outsiders from reading your data or shutting down your Elasticsearch cluster through its [REST API] . To restrict access and therefore increase security, find the line that specifies network.host, uncomment it, and replace its value with localhost so it reads like this
   "network.host: localhost"
 
 - Start the Elasticsearch service with systemctl. Give Elasticsearch a few moments to start up. Otherwise, you may get errors about not being able to connect.
- 'sudo systemctl start elasticsearch'
+
+     'sudo systemctl start elasticsearch'
+
 - Next, run the following command to enable Elasticsearch to start up every time your server boots:
- `sudo systemctl enable elasticsearch`
+    `sudo systemctl enable elasticsearch`
 
 ### Install Composer
 
-`curl -sS https://getcomposer.org/installer -o composer-setup.php`
-`sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer`
+     `curl -sS https://getcomposer.org/installer -o composer-setup.php`
+     `sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer`
 
 - You have successfully installed Composer on the system. It is available for global use as we have stored it to /usr/local/bin/.
 
 - Check the Composer version with the following command -
 
-`composer -V`
+     `composer -V`
 
 ### Installation and Configuration of Magento
 
@@ -112,13 +117,13 @@
 - Magento files are downloaded to directory /opt/magento2. To use another path, you can edit the command above for another location.
 After the download is complete, you can start the installation with the command below-
 
-`cd /opt/magento2`
+     `cd /opt/magento2`
 
 #### Create Admin User
 
 - You can edit the domain name, email address, and admin password. Use the following command -
 
-`php bin/magento setup:install \
+    `php bin/magento setup:install \
 --base-url=https://test.mgt.com  \
 --db-host=localhost \
 --db-name=magentodb \
@@ -133,18 +138,20 @@ After the download is complete, you can start the installation with the command 
 --currency=USD \
 --timezone=America/Chicago \
 --use-rewrites=1`
+
 - After the installation is complete, you will see the following output:
 
 [SUCCESS]: Magento installation complete. 
 [SUCCESS]: Magento Admin URI: /admin_xyz
 
+
 - You can correct the permissions with the command below -
-`$ sudo chown -R www-data. /opt/magento2`
+     `$ sudo chown -R www-data. /opt/magento2`
 - Two-factor authentication is enabled by default. If you want to disable it, you can run the command -
 
-`$ sudo -u www-data bin/magento module:disable Magento_TwoFactorAuth`
+     `$ sudo -u www-data bin/magento module:disable Magento_TwoFactorAuth`
 
-`$ sudo -u www-data bin/magento cache:flush`
+     `$ sudo -u www-data bin/magento cache:flush`
 
 
 #### Setup Cron Jobs
@@ -162,16 +169,17 @@ After the download is complete, you can start the installation with the command 
 ```
 ### Install and Configure Redis Server 
 -Install Redis-Server and configure Magento to store the cache files and the sessions in Redis instead of the file system.
-  #### Install redis
+
+#### Install redis
   
- `apt install redis`
-  - check version
+   `apt install redis`
+- check version
  
-  `redis --v`
+   `redis --v`
 #### Configure Magento2 with Redis as Cache Storage
 - To configure Redis for Magento 2 cache, replace the cache settings in /opt/magento2/app/etc/env.php with the following one:
 
-`sudo vi /opt/magento2/app/etc/env.php`
+    `sudo vi /opt/magento2/app/etc/env.php`
 
 ```
 'cache' => [
@@ -230,10 +238,10 @@ After the download is complete, you can start the installation with the command 
 
 #### Configure Redis Default Caching
 
-`sudo -u www-data bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=127.0.0.1 –cache-backend-redis-db=0`
+   `sudo -u www-data bin/magento setup:config:set --cache-backend=redis --cache-backend-redis-server=127.0.0.1 –cache-backend-redis-db=0`
  
 ### Install Magento Sample Data
-  `vi  /opt/magento2/composer.json`
+   `vi  /opt/magento2/composer.json`
  
 - paste above below data inside "require" field 
 
@@ -277,7 +285,7 @@ After the download is complete, you can start the installation with the command 
 
      `sudo php bin/magento setup:di:compile
 
-      `sudo php bin/magento setup:static-content:deploy -f`
+     `sudo php bin/magento setup:static-content:deploy -f`
 
 - Now done with the sample data, You can check on browser by refreshing test.mgt.com data will be there.
 
@@ -285,7 +293,7 @@ After the download is complete, you can start the installation with the command 
 
  - create certificate
 
-`$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/magento2_selfsigned.key -out /etc/ssl/certs/magento2_selfsigned.crt`
+   `$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/magento2_selfsigned.key -out /etc/ssl/certs/magento2_selfsigned.crt`
 
 - Generating a RSA private key
 
@@ -308,7 +316,7 @@ Common Name (e.g. server FQDN or YOUR name) []:test.mgt.com
 Email Address []:admin@test.mgt.com
 ```
 - Change configuration file
-`sudo vi  /etc/nginx/conf.d/magento2.conf`
+   `sudo vi  /etc/nginx/conf.d/magento2.conf`
 
 ```
 upstream fastcgi_backend {
@@ -332,7 +340,7 @@ server_name test.mgt.com;
 ```
 - Restart Nginx Server
 
-`systemctl restart nginx`
+    `systemctl restart nginx`
 
 - Access test.mgt.com with secure protocol
    *Note: It is self signed certificate thats why it may be look like Insecure.*
@@ -341,7 +349,7 @@ server_name test.mgt.com;
 
 -  Go to admin panal using test.mgt.com/admin_panel
 - If you dont know correct url for the admin_panel
-  `php bin/magento info:adminuri`
+     `php bin/magento info:adminuri`
 
 - Give credential for admin user and password and redirect to admin panel.
 - Go to this path store>configuration>advance>system>full page cache
@@ -349,11 +357,11 @@ server_name test.mgt.com;
 - File default.vcl must be downloaded to your pc (*Note:check apropriate version*).
 - Add port 80 for varnish and as per version 6 download file default.vcl
 - Move file
-`mv /etc/varnish/default.vcl /etc/varnish/default.vcl.Back`
+    `mv /etc/varnish/default.vcl /etc/varnish/default.vcl.Back`
 
 - Now upload default.vcl which was downloaded from your magento admin panel.
 - Now we need to change the port. By default Varnish cache listening a :6081 port. But we need :80 port and nginx at :8080
-  `vi /etc/nginx/conf.d/magento.conf`
+     `vi /etc/nginx/conf.d/magento.conf`
 
 ```
 server {
@@ -369,7 +377,7 @@ set $MAGE_ROOT  /opt/magento;
 - So first of all lets edit Varnish configuration.
 `systemctl restart varnish`
 
-`systemctl restart nginx`
+    `systemctl restart nginx`
 
 
 
